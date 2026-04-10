@@ -1,7 +1,11 @@
 import { loadEnvFile } from "node:process";
 import { defineConfig, env } from "@prisma/config";
 
-loadEnvFile();
+try {
+  loadEnvFile();
+} catch (e) {
+  // .env file might not exist in production/Vercel
+}
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
