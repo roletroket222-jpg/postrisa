@@ -83,7 +83,7 @@ export default async function KasbonRecordPage() {
               bersangkutan sesuai tanggal filter laporan gaji.
             </div>
             <div className="rounded-3xl border border-border/80 bg-background/70 p-4">
-              Satu karyawan hanya boleh memiliki satu "record kasbon" per tanggal. Jika karyawan ingin
+              Satu karyawan hanya boleh memiliki satu &quot;record kasbon&quot; per tanggal. Jika karyawan ingin
               mencairkan dua kali di hari yang sama, silakan edit (tambahkan jumlahnya) di record aktif.
             </div>
             <div className="rounded-3xl border border-border/80 bg-background/70 p-4">

@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import { notFound } from "next/navigation";
 
 import { AlertCircle } from "lucide-react";
@@ -42,8 +42,8 @@ export default async function EditKasbonRecordPage({
         <div className="flex items-start gap-3">
           <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
           <p>
-            Pastikan perubahan nominal sudah sesuai. Nilai terbaru akan otomatis memotong "Total Upah" 
-            menjadi "Upah Bersih" pada laporan di periode yang bersangkutan.
+            Pastikan perubahan nominal sudah sesuai. Nilai terbaru akan otomatis memotong &quot;Total Upah&quot; 
+            menjadi &quot;Upah Bersih&quot; pada laporan di periode yang bersangkutan.
           </p>
         </div>
       </div>

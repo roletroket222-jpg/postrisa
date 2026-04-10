@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 
-import type { Employee } from "@/generated/prisma/client";
+
 import { assertAdminSession } from "@/server/auth/session";
 import { prisma } from "@/server/db/client";
 import {
@@ -30,7 +30,7 @@ const kasbonUpdateSchema = kasbonHeaderSchema.extend({
   id: z.string().uuid("Record tidak valid."),
 });
 
-type KasbonRecordWithRelations = Awaited<ReturnType<typeof getActiveKasbonRecordById>>;
+
 
 class KasbonValidationError extends Error {
   fieldErrors: FormActionState["fieldErrors"];
@@ -217,7 +217,7 @@ export async function getActiveKasbonRecordById(id: string) {
   });
 }
 
-function assertEmployeeIsActive(employee: NonNullable<KasbonRecordWithRelations>["employee"] | null | undefined) {
+function assertEmployeeIsActive(employee: { deletedAt: Date | null } | null | undefined) {
   if (!employee) {
     throw new KasbonValidationError("Karyawan tidak ditemukan.");
   }
@@ -281,7 +281,7 @@ export async function createKasbonRecordAction(
       },
     });
 
-    assertEmployeeIsActive(employee as any);
+    assertEmployeeIsActive(employee);
 
     await prisma.$transaction(async (tx) => {
       await assertUniqueActiveKasbonRecord(tx, employeeId, tanggal);
@@ -337,7 +337,7 @@ export async function updateKasbonRecordAction(
       },
     });
 
-    assertEmployeeIsActive(employee as any);
+    assertEmployeeIsActive(employee);
 
     await prisma.$transaction(async (tx) => {
       const currentRecord = await tx.kasbonRecord.findFirst({
